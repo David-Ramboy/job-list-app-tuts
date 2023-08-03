@@ -2,7 +2,7 @@
   <div>
     <div v-if="session">
     <button @click="onLogout">Logout</button>
-
+      {{ userId }}
       <header>
         <div class="order">
           <button @click="handleClick('title')">order by title</button>
@@ -56,6 +56,10 @@ export default defineComponent({
     onLogout: {
       required: true,
       type: Function as PropType<()=> void>
+    },
+    userId:{
+      required: true,
+      type: String
     }
   }
 })

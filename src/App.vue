@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-      <router-view :session="session"  :onLogout="onLogout" :redirectToLogin="redirectToLogin" :handleClick="handleClick" :order="order" :jobs="jobs"></router-view>
+      <router-view :session="session"  :userId="userId" :onLogout="onLogout" :redirectToLogin="redirectToLogin" :handleClick="handleClick" :order="order" :jobs="jobs"></router-view>
   </div>
 </template>
 
