@@ -6,11 +6,13 @@ import JobListTemplate from '../components/JobsListTemplate.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/auth',
+    name:'auth',
     component: Authview,
   },
   {
-    path:'/job-list',
+    path:'/',
+    name:'home',
     component: JobListTemplate,
     props: (route) => ({
 

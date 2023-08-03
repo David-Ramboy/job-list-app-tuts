@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <router-view :handleClick="handleClick" :order="order" :jobs="jobs"></router-view>
+      <router-view :session="session"  :onLogout="onLogout" :redirectToLogin="redirectToLogin" :handleClick="handleClick" :order="order" :jobs="jobs"></router-view>
   </div>
 </template>
 
@@ -10,18 +10,24 @@
 import { defineComponent, reactive, ref, toRefs } from 'vue';
 import Job from './types/Job'
 import OrderTerm from './types/OrderTerms'
+import * as Session from "supertokens-auth-react/recipe/session";
+import { signIn } from 'supertokens-auth-react/lib/build/recipe/emailpassword';
 
 export default defineComponent({
   name: 'App',
+  data() {
+    return {
+      session: false,
+      userId: "",
+    };
+  },
   setup() {
-
     // const me: Job = {
     //   title:'software developer',
     //   location:'smesoft',
     //   salary:10,
     //   id:'1233213241'
     // }
-
     const jobs = ref<Job[]>([
       {title: 'farm worker', location: 'lolon ranch', salary:3000, id: '1'},
       {title: 'quarryman', location: 'death mountain', salary:4000, id: '2'},
@@ -47,7 +53,25 @@ export default defineComponent({
     // return {me}
     return {jobs, handleClick, order}
     
-  }, 
+  },  
+   mounted() {
+    this.getUserInfo();
+  },
+  methods: {
+    redirectToLogin() {
+      window.location.href = "/auth";
+    },
+    async getUserInfo() {
+      this.session = await Session.doesSessionExist();
+      if (this.session) {
+        this.userId = await Session.getUserId();
+      }
+    },
+    async onLogout() {
+      await Session.signOut();
+      window.location.href = "/auth";
+    },
+  },
   // data() {
   //   return {
   //     name: 'Link',

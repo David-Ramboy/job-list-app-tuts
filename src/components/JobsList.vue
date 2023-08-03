@@ -32,7 +32,8 @@ export default defineComponent({
         order: {
             required: true,
             type: String as PropType<OrderTerm>
-        }
+        },
+        
     },
     setup(props) {
         const orderedJobs = computed(() => {
@@ -41,7 +42,8 @@ export default defineComponent({
             })
         })
         return { orderedJobs }
-    }
+    },
+  
 })
 </script>
 
